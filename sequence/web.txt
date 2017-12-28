@@ -1,0 +1,20 @@
+title Web
+
+User->+Controller: request
+
+Controller->+Service: parameter
+
+Service->+Gateway: parameter
+
+Gateway->+DB:select
+DB-->-Gateway:response
+
+Gateway-->-Service: Entity
+
+Service->+Model:Entity
+Model-->-Service:Entity
+
+Service-->-Controller: response
+
+
+Controller-->-User: Presenter
