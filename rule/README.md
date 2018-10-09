@@ -1,45 +1,50 @@
 # アプリケーション層
-## Controller
+
+### Controller
 ```
 いろいろなリクエストを受取必要な処理を担当
 ```
 
-## Form
-
-```
-UIからのデータの格納とバリデーション
-```
-
-## Presenter
+### Presenter
 ```
 UIの表示に必要な処理を担当
 ```
 
 # ドメイン層
 
-## Entity
+### Entity
 ```
 ビジネスロジック
 ```
 
-## Translator
+### Form
+
 ```
-複雑なEntityの生成
+UseCaseにわたすデータ、
+どうしてもというならここで入力値チェックをする
 ```
 
-## Usecase
+### Translator
+```
+Entityの生成をカプセル化
+```
+
+### UseCase
 ```
 業務フロー
 ```
 
-## Gateway
+### Gateway
 ```
 外部機能へのインターフェース
 ```
 
+# インフラストラクチャ層
+
 ### Repository
+
 ```
-Dataの永続化
+Data関連、DBとか
 ```
 
 
