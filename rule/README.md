@@ -1,45 +1,60 @@
-# アプリケーション層
+# 構成
+
+## アプリケーション層
 
 ### Controller
+
 ```
-いろいろなリクエストを受取必要な処理を担当
+HTTPのリクエストなど、ユーザのリクエストを受ける
 ```
 
 ### Presenter
 ```
-UIの表示に必要な処理を担当
+viewが必要なアプリケーションの場合はPresenterで表現する
 ```
 
-# ドメイン層
+## ドメイン層
 
 ### Entity
+
 ```
 ビジネスロジック
 ```
 
-### Form
+### Port
 
 ```
-UseCaseにわたすデータ、
-どうしてもというならここで入力値チェックをする
+UseCaseに渡す（もらう）データ
 ```
+
+#### InputPort
+#### OutputPort
 
 ### Translator
+
 ```
-Entityの生成をカプセル化
+EntityやPortの変換
 ```
 
 ### UseCase
+
 ```
 業務フロー
+
+Facade パターンで実装するのが良さそう
 ```
 
+#### Interactor
+
 ### Gateway
+
 ```
 外部機能へのインターフェース
 ```
 
-# インフラストラクチャ層
+#### RepositoryInterfereとか
+
+## インフラストラクチャ層
 
 ### Repository
 
