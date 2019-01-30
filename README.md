@@ -1,4 +1,4 @@
-# -memo
+# Architect
 
 現状いいと思うアーキテクト
 
@@ -61,3 +61,5 @@ Gatewayに用意されているInterfaceの実装
 #### Service
 
 Gatewayに用意されているInterfaceの実装
+
+<img src="/Architect.png" alt="イメージ">
