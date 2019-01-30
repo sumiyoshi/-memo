@@ -1,7 +1,7 @@
 package main.kotlin.domain.gateway.interactor
 
 import main.kotlin.domain.gateway.repository.UserRepository
-import main.kotlin.domain.usecase.Errors
+import main.kotlin.domain.usecase.Error
 import main.kotlin.domain.usecase.signin.Output
 import main.kotlin.domain.usecase.signin.UserCase
 
@@ -11,5 +11,5 @@ interface SignInInteractor {
 
     val repository: UserRepository
 
-    fun signIn(): Pair<Output?, Errors?>
+    fun signIn(): Pair<Output?, Error?>
 }

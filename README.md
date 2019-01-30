@@ -49,6 +49,10 @@ Interactorを生成し、ユーザにレスポンスを返す<br />
 レスポンスデータが複雑な場合なPresenterとViewModel(DS)を使用するのもあり<br />
 トランザクションはこの単位がいい
 
+#### Infrastructure
+
+フレームワークや外部のライブラリに依存していて、かつInterfaceAdapter内で使用するもの
+
 #### Interactor
 
 Gatewayに用意されているInterfaceの実装<br />
@@ -66,3 +70,20 @@ Gatewayに用意されているInterfaceの実装
 Gatewayに用意されているInterfaceの実装
 
 <img src="/Architect.png" alt="イメージ">
+
+```
+tree
+├── domain
+│   ├── entity
+│   ├── gateway
+│   │   ├── interactor
+│   │   ├── repository
+│   │   └── service
+│   └── UseCase
+└── InterfaceAdapter
+    ├── controller
+    ├── infrastructure
+    ├── interactor
+    ├── repository
+    └── service
+```
