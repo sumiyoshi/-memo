@@ -15,7 +15,7 @@ class UserController {
 
         val interactor = SignInInteractorImpl(signInUserCase(), userRepository)
 
-        val output = interactor.signIn()
+        val (output, errors) = interactor.signIn()
 
         //todo 複雑なものはoutputをプレゼンターに渡す
 
@@ -28,7 +28,7 @@ class UserController {
 
         val interactor = SignUpInteractorImpl(signUpUserCase(), userRepository)
 
-        val output = interactor.signUp()
+        val (output, errors) = interactor.signUp()
 
         //todo 複雑なものはoutputをプレゼンターに渡す
 

@@ -52,7 +52,10 @@ Interactorを生成し、ユーザにレスポンスを返す<br />
 #### Interactor
 
 Gatewayに用意されているInterfaceの実装<br />
-入力値のパラメータの検証を行い、UserCaseを実行する
+入力値のパラメータの検証を行い、UserCaseを実行する<br />
+実行した結果のOutputの検証も行う<br />
+つまりUserCaseのInputとOutputのデータの検証をする
+
 
 #### Repository
 
