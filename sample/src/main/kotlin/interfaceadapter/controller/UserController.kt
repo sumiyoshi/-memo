@@ -1,19 +1,22 @@
 package main.kotlin.interfaceadapter.controller
 
+import main.kotlin.interfaceadapter.adapter.operator.user.SignInOperatorImpl
+import main.kotlin.interfaceadapter.adapter.operator.user.SignUpOperatorImpl
+import main.kotlin.interfaceadapter.adapter.receiver.UserReceiverImpl
+import main.kotlin.interfaceadapter.adapter.sender.UserSenderImpl
 import main.kotlin.domain.usecase.signin.UserCaseImpl as signInUserCaseImpl
 import main.kotlin.domain.usecase.signup.UserCaseImpl as signUpUserCaseImpl
-import main.kotlin.interfaceadapter.interactor.*
-import main.kotlin.interfaceadapter.repository.UserRepositoryImpl
 
 class UserController {
 
-    private val userRepository = UserRepositoryImpl()
+    private val userSender = UserSenderImpl()
+    private val userReceiver = UserReceiverImpl()
 
     fun signInAction(): Any? {
 
         //todo トランザクションはコントローラで
 
-        val interactor = SignInInteractorImpl(signInUserCaseImpl(), userRepository)
+        val interactor = SignInOperatorImpl(signInUserCaseImpl(), userReceiver)
 
         val (output, errors) = interactor.signIn()
 
@@ -26,7 +29,7 @@ class UserController {
 
         //todo トランザクションはコントローラで
 
-        val interactor = SignUpInteractorImpl(signUpUserCaseImpl(), userRepository)
+        val interactor = SignUpOperatorImpl(signUpUserCaseImpl(), userReceiver, userSender)
 
         val (output, errors) = interactor.signUp()
 

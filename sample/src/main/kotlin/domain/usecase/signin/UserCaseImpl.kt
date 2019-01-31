@@ -1,15 +1,15 @@
 package main.kotlin.domain.usecase.signin
 
-import main.kotlin.domain.gateway.repository.UserRepository
+import main.kotlin.domain.gateway.receiver.UserReceiver
 
 class UserCaseImpl: UserCase {
 
     override operator fun invoke(
-            repository: UserRepository,
+            receiver: UserReceiver,
             input: Input
     ): Output? {
 
-        return repository.findByIdAndPassword(
+        return receiver.findByIdAndPassword(
                 input.loginId,
                 input.password
         )?.let {

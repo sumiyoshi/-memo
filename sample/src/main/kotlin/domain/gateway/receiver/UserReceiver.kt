@@ -1,13 +1,11 @@
-package main.kotlin.domain.gateway.repository
+package main.kotlin.domain.gateway.receiver
 
 import main.kotlin.domain.entity.User
 
-interface UserRepository {
+interface UserReceiver {
 
     fun find(id: Int): User?
 
     fun findByIdAndPassword(loginId: String, password: String): User?
-
-    fun save(user: User): Int
 
 }

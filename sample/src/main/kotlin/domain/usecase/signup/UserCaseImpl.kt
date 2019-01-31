@@ -1,19 +1,21 @@
 package main.kotlin.domain.usecase.signup
 
 import main.kotlin.domain.entity.User
-import main.kotlin.domain.gateway.repository.UserRepository
+import main.kotlin.domain.gateway.receiver.UserReceiver
+import main.kotlin.domain.gateway.sender.UserSender
 
-class UserCaseImpl: UserCase {
+class UserCaseImpl : UserCase {
 
     override operator fun invoke(
-            repository: UserRepository,
+            receiver: UserReceiver,
+            sender: UserSender,
             input: Input
     ): Output? {
 
         val user = User(null, input.loginId, input.name, input.password)
-        val id = repository.save(user)
+        val id = sender.save(user)
 
-        return repository.find(id)?.let {
+        return receiver.find(id)?.let {
             Output(it.name)
         }
     }

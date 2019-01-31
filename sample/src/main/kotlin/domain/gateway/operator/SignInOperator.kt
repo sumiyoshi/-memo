@@ -1,15 +1,15 @@
-package main.kotlin.domain.gateway.interactor
+package main.kotlin.domain.gateway.operator
 
-import main.kotlin.domain.gateway.repository.UserRepository
+import main.kotlin.domain.gateway.receiver.UserReceiver
 import main.kotlin.domain.usecase.Error
 import main.kotlin.domain.usecase.signin.Output
 import main.kotlin.domain.usecase.signin.UserCase
 
-interface SignInInteractor {
+interface SignInOperator {
 
     val userCase: UserCase
 
-    val repository: UserRepository
+    val receiver: UserReceiver
 
     fun signIn(): Pair<Output?, Error?>
 }

@@ -1,14 +1,9 @@
-package main.kotlin.interfaceadapter.repository
+package main.kotlin.interfaceadapter.adapter.receiver
 
 import main.kotlin.domain.entity.User
-import main.kotlin.domain.gateway.repository.UserRepository
+import main.kotlin.domain.gateway.receiver.UserReceiver
 
-class UserRepositoryImpl: UserRepository {
-
-
-    override fun save(user: User): Int {
-        return 1
-    }
+class UserReceiverImpl: UserReceiver {
 
     override fun findByIdAndPassword(loginId: String, password: String): User? {
         return User(null, loginId, password, "")
@@ -17,4 +12,5 @@ class UserRepositoryImpl: UserRepository {
     override fun find(id: Int): User? {
         return User(id, "", "", "")
     }
+
 }

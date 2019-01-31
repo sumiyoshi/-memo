@@ -1,11 +1,11 @@
 package main.kotlin.domain.usecase.signin
 
-import main.kotlin.domain.gateway.repository.UserRepository
+import main.kotlin.domain.gateway.receiver.UserReceiver
 
 interface UserCase {
 
     operator fun invoke(
-            repository: UserRepository,
+            receiver: UserReceiver,
             input: Input
     ): Output?
 

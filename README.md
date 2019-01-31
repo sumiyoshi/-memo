@@ -1,5 +1,6 @@
 # Architect
 
+Gateway Architectと呼ぶことにした<br />
 現状いいと思うアーキテクト
 
 
@@ -16,23 +17,27 @@
 
 #### Entity
 
-ビジネスデータや操作、ただし規模によってはデータ構造のみの場合もありえる
+ビジネスデータや操作、ただし規模によってはデータ構造のみの場合もありえる<br />
+データと操作は分ける、操作用のclassは関数の集合体
 
 #### Gateway
 
-境界を越えるときはGatewayにInterfaceを定義する
+境界を越えるときはGatewayにInterfaceを定義する<br />
+Gatewayは下記の3つの種類があり、データの流れは一方通行
 
-##### Interactor
+##### Operator
 
 InterfaceAdapterからUserCaseを呼び出すためのInterface
 
-##### Repository
+##### Receiver
 
-DomainからDBの処理を呼び出すためのInterface
+InterfaceAdapterからDomainへデータを取得するためのInterface<br />
+DBだとSelect、ただしDB限定ではないファイルの取得APIを経由して外部のサービスからのデータ取得もありえる
 
-#### Service
+##### Sender
 
-Interactor、Repository以外の理由で境界を超えるとき
+DomainからInterfaceAdapterへデータを送るためのInterface<br />
+DBだとinsertなど、メールの送信などもこちらに含まれる
 
 #### UseCase
 
@@ -41,6 +46,25 @@ Interactor、Repository以外の理由で境界を超えるとき
 引数にはGatewayのInterfaceとInput(DS)
 
 ### InterfaceAdapter
+
+#### Adapter
+
+Gatewayに定義されているInterfaceの実装
+
+##### Operator
+
+Operatorの実装<br />
+入力値のパラメータの検証を行い、UserCaseを実行する<br />
+実行した結果のOutputの検証も行う<br />
+つまりUserCaseのInputとOutputのデータの検証をする
+
+##### Receiver
+
+Receiverの実装
+
+##### Sender
+
+Senderの実装
 
 #### Controller OR Activity
 
@@ -53,37 +77,31 @@ Interactorを生成し、ユーザにレスポンスを返す<br />
 
 フレームワークや外部のライブラリに依存していて、かつInterfaceAdapter内で使用するもの
 
-#### Interactor
-
-Gatewayに用意されているInterfaceの実装<br />
-入力値のパラメータの検証を行い、UserCaseを実行する<br />
-実行した結果のOutputの検証も行う<br />
-つまりUserCaseのInputとOutputのデータの検証をする
-
-
-#### Repository
-
-Gatewayに用意されているInterfaceの実装
-
-#### Service
-
-Gatewayに用意されているInterfaceの実装
 
 <img src="/Architect.png" alt="イメージ">
 
 ```
-tree
-├── domain
+.
+├── Domain
 │   ├── entity
 │   ├── gateway
-│   │   ├── interactor
-│   │   ├── repository
-│   │   └── service
-│   └── UseCase
+│   │   ├── operator
+│   │   ├── receiver
+│   │   └── sender
+│   └── useCase
+│       ├── signIn
+│       │   ├── DS.kt
+│       │   ├── UserCase.kt
+│       │   └── UserCaseImpl.kt
+│       └── signUp
+│           ├── DS.kt
+│           ├── UserCase.kt
+│           └── UserCaseImpl.kt
 └── InterfaceAdapter
+    ├── adapter
+    │   ├── operator
+    │   ├── receiver
+    │   └── sender
     ├── controller
-    ├── infrastructure
-    ├── interactor
-    ├── repository
-    └── service
+    └── infrastructure
 ```
