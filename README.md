@@ -1,6 +1,6 @@
-# Architect
+# Gateway Architecture
 
-Gateway Architectと呼ぶことにした<br />
+Gateway Architectureと呼ぶことにした<br />
 現状いいと思うアーキテクト
 
 
