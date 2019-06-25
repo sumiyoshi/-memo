@@ -9,96 +9,77 @@ Gateway Architectureと呼ぶことにした<br />
 |名称|詳細|
 |---|---|
 |Domain|ビジネスロジック|
-|InterfaceAdapter|ユーザや外部とのやり取り|
+|Adapter|外部とのやり取り|
+|Gateway|ユーザとのやり取り|
 
-※以下「境界」とはDomainとInterfaceAdapterの間に存在するものとする
+## Domain
 
-### Domain
+### Model
 
 #### Entity
 
 ```
-ビジネスデータや操作、ただし規模によってはデータ構造のみの場合もありえる
-データと操作は分ける、操作用のclassは関数の集合体
+todo
 ```
 
-#### Gateway
+#### Value Object
 
 ```
-境界を越えるときはGatewayにInterfaceを定義する
-Gatewayは下記の3つの種類があり、データの流れは一方通行
+todo
 ```
+
+### UseCase
+
 
 ##### Operator
 
 ```
-InterfaceAdapterからUserCaseを呼び出すためのInterface
+todo
 ```
 
-##### Receiver
+#### Manager
 
 ```
-InterfaceAdapterからDomainへデータを取得するためのInterface
-DBだとSelect、ただしDB限定ではないファイルの取得APIを経由して外部のサービスからのデータ取得もありえる
+todo
 ```
 
-##### Sender
+#### Port
 
 ```
-DomainからInterfaceAdapterへデータを送るためのInterface
-DBだとinsertなど、メールの送信などもこちらに含まれる
+todo
 ```
 
-#### UseCase
+#### CommandInterface
 
 ```
-ビジネスルールをもつ、Input(DS)とOutput(DS)を定義する、
-レスポンスは定義されているOutput(DS)
-引数にはGatewayのInterfaceとInput(DS)
+todo
 ```
 
-### InterfaceAdapter
-
-#### Adapter
+#### QueryInterface
 
 ```
-Gatewayに定義されているInterfaceの実装
+todo
 ```
 
-##### Operator
+## Adapter
 
 ```
-Operatorの実装
-入力値のパラメータの検証を行い、UserCaseを実行する
-実行した結果のOutputの検証も行う
-つまりUserCaseのInputとOutputのデータの検証をする
+todo
 ```
 
-##### Receiver
+
+## Gateway
+
+#### Controller
 
 ```
-Receiverの実装
+todo
 ```
 
-##### Sender
+### Presenter
 
 ```
-Senderの実装
-```
-
-#### Controller OR Activity
-
-```
-ユーザからのリクエストを受け取る
-Interactorを生成し、ユーザにレスポンスを返す
-レスポンスデータが複雑な場合なPresenterとViewModel(DS)を使用するのもあり
-トランザクションはこの単位がいい
-```
-
-#### Infrastructure
-
-```
-フレームワークや外部のライブラリに依存していて、かつInterfaceAdapter内で使用するもの
+todo
 ```
 
 <img src="/Architect.png" alt="イメージ">
@@ -106,25 +87,23 @@ Interactorを生成し、ユーザにレスポンスを返す
 ```
 .
 ├── Domain
-│   ├── entity
-│   ├── gateway
-│   │   ├── operator
-│   │   ├── receiver
-│   │   └── sender
-│   └── useCase
+│   ├── model
+│   │   ├── entity
+│   │   └── valueObject
+│   │   
+│   └── Operator
 │       ├── signIn
-│       │   ├── DS.kt
-│       │   ├── UserCase.kt
-│       │   └── UserCaseImpl.kt
+│       │   ├── InputPort
+│       │   ├── OutputPort
+│       │   ├── SignInOp
+│       │   └── SignInQueryInterface
 │       └── signUp
-│           ├── DS.kt
-│           ├── UserCase.kt
-│           └── UserCaseImpl.kt
-└── InterfaceAdapter
-    ├── adapter
-    │   ├── operator
-    │   ├── receiver
-    │   └── sender
-    ├── controller
-    └── infrastructure
+│           ├── InputPort
+│           ├── OutputPort
+│           ├── SignUpOp
+│           ├── SignUpCommandInterface
+│           └── SignUpQueryInterface
+└── GateWay
+    ├── Controller
+    └── Presenter
 ```
