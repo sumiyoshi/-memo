@@ -3,14 +3,12 @@
 Gateway Architectureと呼ぶことにした<br />
 現状いいと思うアーキテクト
 
-
 ## 構成
 
 |名称|詳細|
 |---|---|
 |Domain|ビジネスロジック|
-|Adapter|外部とのやり取り|
-|Gateway|ユーザとのやり取り|
+|Gateway|Domain層と外部とのやり取りを吸収する場所|
 
 ## Domain
 
@@ -34,52 +32,56 @@ todo
 ##### Operator
 
 ```
-todo
+業務フローを制御する。
+他のOperatorには依存しない
 ```
 
 #### Manager
 
 ```
-todo
+複数のOperatorを制御する場合に使用
 ```
 
 #### Port
 
 ```
-todo
+OperatorまたはManagerごとに、InputとOutputのパラメータをオブジェクトで定義
 ```
 
 #### CommandInterface
 
 ```
-todo
+OperatorまたはManagerごとに、外部へのデータの操作を期待するものを実装
+複数のOperatorまたはManagerで使用はしない。
 ```
 
 #### QueryInterface
 
 ```
-todo
+OperatorまたはManagerごとに、外部からのデータの取得を期待するものを実装
+複数のOperatorまたはManagerで使用はしない。
 ```
-
-## Adapter
-
-```
-todo
-```
-
 
 ## Gateway
+
+#### Adapter
+
+```
+外部ライブラリとDomainをつなぐクラス
+CommandInterfaceとQueryInterfaceの実態
+```
 
 #### Controller
 
 ```
-todo
+ユーザからのリクエストを受付、必要なPortを生成し、
+OperatorまたはManagerを実行
 ```
 
-### Presenter
+##### View
 
 ```
-todo
+テンプレートにわたすパラメータの定義と表示のときの変換処理
 ```
 
 <img src="/Architect.png" alt="イメージ">
@@ -87,9 +89,9 @@ todo
 ```
 .
 ├── Domain
-│   ├── model
-│   │   ├── entity
-│   │   └── valueObject
+│   ├── Model
+│   │   ├── Entity
+│   │   └── ValueObject
 │   │   
 │   └── Operator
 │       ├── signIn
@@ -105,5 +107,5 @@ todo
 │           └── SignUpQueryInterface
 └── GateWay
     ├── Controller
-    └── Presenter
+    └── View
 ```
